@@ -1,4 +1,4 @@
-json.posts @posts do |post|
+json.post @post do |post|
     json.id post.id
     json.topic post.topic
     json.body post.body
