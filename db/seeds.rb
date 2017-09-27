@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# test
+
   title1 = Post.create(topic: "What is the most difficult concept you've encountered in programming?", body: "ha ha ha aha ahahaha")
   title2 = Post.create(topic: "Our second Post", body: "test 2")
 
