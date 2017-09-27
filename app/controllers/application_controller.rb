@@ -1,20 +1,37 @@
 class ApplicationController < ActionController::Base
-  # protect_from_forgery with: :exception  #=> NOTE: This does not work in an API controller.
-  #TODO: See if there is some other thing that must be done instead to protect from forgery, or if this is even necessary.
+  include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  private #=> NOTE: Does this line belong in an API controller??
+  private
 
+  def authenticate
+    authenticate_token || render_unauthorized
+    # THIS IS THE SAME AS:
+    # if !authenticate_token
+    #   render_unauthorized
+  end
 
-  #NOTE: There are two current_user methods below. The first is basic, the second is more complex but better, avoiding unnecessary database calls.
+  def authenticate_token
+    authenticate_with_http_token do |token, options|
+      @user = User.find_by(token: token)
+    end
+  end
 
-  # def current_user #=> NOTE: Does this line belong in an API controller??
+  def render_unauthorized
+    self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+    render json: {error: 'Bad credentials'}, status: :unauthorized
+  end
+
+  #NOTE: There are three current_user methods below, in descending order of sophistication. The first is basic, the second is more complex but better, avoiding unnecessary database calls.
+
+  # def current_user NOTE: This is what works in Clinton's example
+  #   @user
+  # end
+
+  # def current_user
   #   User.find(session[:user_id]) if session[:user_id]
   # end
 
-  def current_user #=> NOTE: Does this line belong in an API controller??
+  def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-
-  helper_method :current_user #=> NOTE: Does this line belong in an API controller??
-
 end
