@@ -1,5 +1,6 @@
-class ApplicationController < ActionController::API
-  protect_from_forgery with: :exception  #=> NOTE: Does this line belong in an API controller??
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception  #=> NOTE: This does not work in an API controller.
+  #TODO: See if there is some other thing that must be done instead to protect from forgery, or if this is even necessary.
 
   private #=> NOTE: Does this line belong in an API controller??
 
