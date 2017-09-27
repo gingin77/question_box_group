@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :answers, only: [:create, :destroy]
     end
 
-    resources :users, except: [:index] do
+    resources :users do
       collection do
         post :login
       end
