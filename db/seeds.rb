@@ -46,3 +46,6 @@
   title3 = Post.create(topic: "How to rollback a specific migration?", body: "I have the following migration file db> migrate > 20100905201547_create_blocks.rb
 
   How can I specifically rollback that migration file?", answers: [answer1, answer2])
+
+  user1 = User.create(username:"users",email:"user@example.com",password:"secret")
+  user2 = User.create(username:"lyman",email:"lyman.johnson@gmail.com",password:"secret")
