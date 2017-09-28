@@ -9,7 +9,9 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 
-gem 'pg', '~> 0.18.4'
+gem 'pg'
+gem 'sqlite3'
+gem 'taps'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
