@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 
   def index
-    @users = Post.all
-    render json: @users
+    @users = User.all
+    render 'index.json'
   end
 
   def show
-    @user = User.find_by(params[:id])
-    render json: @user
+    @user = User.find(params[:id])
+    render 'show.json'
   end
 
 
@@ -24,12 +24,6 @@ class UsersController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
-
-    # Same as above
-    # user = User.find_by(email: params[:email])
-    # if !user.nil?
-    #   user = user.authenticate(params[:password])
-    # end
 
     if !user
       render status: :unauthorized, json: {
