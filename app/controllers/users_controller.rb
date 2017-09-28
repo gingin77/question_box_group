@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @users = Post.all
+    @users = User.all
     render json: @users
   end
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.save
       render status: :created
     else
-      render json: {
+      render json: `{`
         errors: @user.errors
       }, status: :bad_request
     end
