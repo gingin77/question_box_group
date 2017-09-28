@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     render 'show.json'
   end
 
-
   def create
     @user = User.new(user_params)
     if @user.save
@@ -27,7 +26,10 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      # render json: @user.errors, status: :unprocessable_entity
+      render status: :unprocessable_entity, json: {
+        error: "Invalid request. Please try again. New user must have unique username and email, and a password."
+      }
     end
   end
 
