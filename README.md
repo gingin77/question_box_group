@@ -1,25 +1,49 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#CREATE NEW USER
+Submit POST request to
+/users/
 
-Things you may want to cover:
+with a JSON body of:
+  {
+  "user":{
+    "username": "newguy",
+    "email": "newguy@gmail.com",
+    "password": "secret"
+    }
+  }
 
-* Ruby version
+it will respond with a JSON body like:
+  {
+      "user": {
+          "id": 3,
+          "email": "newguy@gmail.com",
+          "username": "newguy"
+      }
+  }
 
-* System dependencies
+#LOGIN EXISTING USER
+Submit POST request to
+/users/login
 
-* Configuration
+with a JSON body of:
+  {
+  	"email": "user@example.com",
+  	"password": "secret"
+  }
 
-* Database creation
+this will reply with a JSON object including token string like this:
+  {
+      "token": "cXMxkkDd3kboM4sYDFxEqxbM"
+  }
 
-* Database initialization
 
-* How to run the test suite
+*NOT YET IMPLEMENTED:*
+#DELETE EXISTING USER
+Submit a DELETE request
+/users/:id
+With an "Authorization" field in the header whose value is:
 
-* Services (job queues, cache servers, search engines, etc.)
+  Token token=<token string>
 
-* Deployment instructions
-
-* ...
-# question_box_group
+The <token string> must be the same as the user's login token.
+It should not have quotes around it.

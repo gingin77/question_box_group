@@ -2,12 +2,12 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: @users
+    render 'index.json'
   end
 
   def show
-    @user = User.find_by(params[:id])
-    render json: @user
+    @user = User.find(params[:id])
+    render 'show.json'
   end
 
 
@@ -16,20 +16,23 @@ class UsersController < ApplicationController
     if @user.save
       render status: :created
     else
-      render json: `{`
+      render json: {
         errors: @user.errors
       }, status: :bad_request
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
   def login
     user = User.find_by(email: params[:email]).try(:authenticate, params[:password])
-
-    # Same as above
-    # user = User.find_by(email: params[:email])
-    # if !user.nil?
-    #   user = user.authenticate(params[:password])
-    # end
 
     if !user
       render status: :unauthorized, json: {
@@ -43,6 +46,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :password)
+    params.require(:user).permit(:email, :username, :password)
   end
 end
