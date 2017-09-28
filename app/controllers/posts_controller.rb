@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
-  # before_action :post_owner, only: [:create, :update, :destroy]
+  before_action :authenticate, only: [:create, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -13,7 +13,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @user = @current_user
+    @post.user = current_user
+    # byebug
 
     if @post.save
       render json: @post, status: :created, location: @post
