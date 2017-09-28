@@ -21,9 +21,9 @@ class ApplicationController < ActionController::Base
     render json: {error: 'Bad credentials'}, status: :unauthorized
   end
 
-  #NOTE: There are three current_user methods below, in descending order of sophistication. The first is basic, the second is more complex but better, avoiding unnecessary database calls.
+  #There are three current_user methods below, in descending order of sophistication. The first is basic, the second is more complex but better, avoiding unnecessary database calls.
 
-  # def current_user NOTE: This is what works in Clinton's example
+  # def current_user --> This is what works in Clinton's example
   #   @user
   # end
 

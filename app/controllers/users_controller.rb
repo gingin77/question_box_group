@@ -2,7 +2,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+<<<<<<< HEAD
+    render json: @users
+=======
     render 'index.json'
+>>>>>>> 55209636f57332c5e9747c0698326693c2691fdf
   end
 
   def show
