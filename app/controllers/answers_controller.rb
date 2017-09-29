@@ -20,10 +20,12 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = Answer.new(answer_params)
+    @post = Post.find(params[:post_id])
+    @answer = @post.answers.create(answer_params)
+    # @answer = Answer.new(answer_params)
     @answer.user_id = current_user.id if current_user
     if @answer.save
-        render json: @answer, status: :created, location: @answer
+        render json: @answer, status: :created, location: @post
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
@@ -56,7 +58,7 @@ class AnswersController < ApplicationController
   end
 
   def require_login
-    redirect_to new_session_path unless logged_in
+    redirect_to new_session_path unless logged_in 
   end
 
   def is_owner
