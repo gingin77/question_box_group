@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
+  before_action :post_owner, only: [:update, :destroy]
+
 
   def index
     @posts = Post.all
@@ -44,8 +46,8 @@ class PostsController < ApplicationController
       params.require(:post).permit(:topic, :body)
     end
 
-    # def post_owner
-    #   set_post
-    #   redirect_to books_path unless @post.user_id == current_user.id
-    # end
+    def post_owner
+      set_post
+      redirect_to posts_path unless @post.user == @user
+    end
 end
