@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
+  before_action :answer_owner, only: [:update, :destroy]
 
   def index
     @answers = Answer.all
@@ -12,7 +13,7 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Post.new(answer_params)
-    # @answer.user = @user
+    @answer.user = @user
     @answer.post = @post
     byebug
 
@@ -44,8 +45,8 @@ class AnswersController < ApplicationController
       params.require(:answer).permit(:topic, :body)
     end
 
-    # def answer_owner
-    #   set_answer
-    #   redirect_to books_path unless @answer.user_id == current_user.id
-    # end
+    def answer_owner
+      set_answer
+      redirect_to posts_path unless @answer.user == @user
+    end
 end
