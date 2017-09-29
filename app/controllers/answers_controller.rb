@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :update, :destroy]
+  # before_action :set_answer, only: [:show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
 
   def index
@@ -7,17 +7,16 @@ class AnswersController < ApplicationController
   end
 
   def show
-    # render 'show.json'
+    render 'show.json'
   end
 
-  def create
-    @answer = Post.new(answer_params)
-    # @answer.user = @user
-    @answer.post = @post
-    byebug
 
+  def create
+    @post = Post.find(params[:post_id])
+    @answer = @post.answers.create(answer_params)
+    @answer.user = @user
     if @answer.save
-      render json: @answer, status: :created, location: @answer
+      render json: @answer, status: :created, location: @post
     else
       render json: @answer.errors, status: :unprocessable_entity
     end
@@ -36,13 +35,17 @@ class AnswersController < ApplicationController
    end
 
   private
-    def set_answer
-      @answer = answer.find(params[:id])
-    end
+    # def set_answer
+    #   @answer = answer.find(params[:id])
+    # end
 
     def answer_params
       params.require(:answer).permit(:topic, :body)
     end
+
+    # def my_post
+    #   @post = Post.find(params[:post_id])
+    # end
 
     # def answer_owner
     #   set_answer
