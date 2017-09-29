@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
     resources :posts do
-      resources :answers, only: [:create, :destroy]
+      resources :answers, only: [:create, :destroy, :show]
     end
+
+    delete '/answers/:id',  to: 'answers#destroy'
 
     resources :users do
       collection do
