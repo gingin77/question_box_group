@@ -3,14 +3,9 @@ class AnswersController < ApplicationController
   before_action :authenticate, only: [:create, :update, :destroy]
   before_action :answer_owner, only: [:update, :destroy]
 
-  def index
-    @answers = Answer.all
-  end
-
   def show
     render 'show.json'
   end
-
 
   def create
     @post = Post.find(params[:post_id])
@@ -32,7 +27,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    #  @answer.destroy
+     @answer.destroy
    end
 
   private
@@ -49,8 +44,9 @@ class AnswersController < ApplicationController
     #   @post = Post.find(params[:post_id])
     # end
 
-    # def answer_owner
-    #   set_answer
+    def answer_owner
+      set_answer
+      render status: :unauthorized, json: {error: "A user must be logged in to change their information."} unless @answer.user_id == @user.id
     #   redirect_to books_path unless @answer.user_id == current_user.id
-    # end
+    end
 end
