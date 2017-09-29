@@ -15,8 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      # render status: :created
-      render json: {token: user.token}
+      render status: :created, json: {token: @user.token}
     else
       # render json: {
       #   errors: @user.errors
@@ -54,7 +53,7 @@ class UsersController < ApplicationController
 
   def is_me
     user = User.find(params[:id])
-    redirect_to users_path unless user.id == current_user.id
+    render status: :unauthorized, json: {error: "A user must be logged in to change their information."} unless user.id == current_user.id
   end
 
   def user_params
