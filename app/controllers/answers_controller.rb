@@ -36,7 +36,7 @@ class AnswersController < ApplicationController
     if @answer.update(answer_params)
       redirect_to @answer
     else
-      render 'edit'
+      render json: @answer.errors, status: :unprocessable_entity
     end
   end
 
@@ -49,7 +49,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:title, :body, :user_id, :link)
+    params.require(:answer).permit(:topic, :body, :user_id, :link)
   end
 
   def require_login
