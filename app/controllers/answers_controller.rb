@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  # before_action :set_answer, only: [:show, :update, :destroy]
+  before_action :set_answer, only: [:show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
   before_action :answer_owner, only: [:update, :destroy]
 
@@ -36,9 +36,10 @@ class AnswersController < ApplicationController
    end
 
   private
-    # def set_answer
-    #   @answer = answer.find(params[:id])
-    # end
+    def set_answer
+      @post = Post.find(params[:post_id])
+      @answer = @post.answers.find(params[:id])
+    end
 
     def answer_params
       params.require(:answer).permit(:answerer, :body)
