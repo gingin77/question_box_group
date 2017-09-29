@@ -1,51 +1,51 @@
 class AnswersController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
+  before_action :set_answer, only: [:show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
 
   def index
-    @posts = Post.all
-    render 'index.json'
+    @answers = Answer.all
   end
 
   def show
-    render 'show.json'
+    # render 'show.json'
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user = @user
-    # byebug
+    @answer = Answer.new(answer_params)
+    # @answer.user = @user
+    @answer.post = @post
+    byebug
 
-    if @post.save
-      render json: @post, status: :created, location: @post
+    if @answer.save
+      render json: @answer, status: :created, location: @answer
     else
-      render json: @post.errors, status: :unprocessable_entity
+      render json: @answer.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    if @post.update(post_params)
-      render json: @post
+    if @answer.update(answer_params)
+      render json: @answer
     else
-      render json: @post.errors, status: :unprocessable_entity
+      render json: @answer.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-     @post.destroy
+     @answer.destroy
    end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
+    def set_answer
+      @answer = answer.find(params[:id])
     end
 
-    def post_params
-      params.require(:post).permit(:topic, :body)
+    def answer_params
+      params.require(:answer).permit(:topic, :body)
     end
 
-    # def post_owner
-    #   set_post
-    #   redirect_to books_path unless @post.user_id == current_user.id
+    # def answer_owner
+    #   set_answer
+    #   redirect_to books_path unless @answer.user_id == current_user.id
     # end
 end
