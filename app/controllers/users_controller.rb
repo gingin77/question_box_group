@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 
   def is_me
     user = User.find(params[:id])
-    redirect_to users_path unless user.id == current_user.id
+    render status: :unauthorized, json: {error: "A user must be logged in to change their information."} unless user.id == current_user.id
   end
 
   def user_params
