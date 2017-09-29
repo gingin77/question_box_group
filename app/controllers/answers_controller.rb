@@ -12,41 +12,59 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = Post.new(answer_params)
-    @answer.user = @user
-    @answer.post = @post
-    byebug
-
-    if @answer.save
-      render json: @answer, status: :created, location: @answer
-    else
-      render json: @answer.errors, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    if @answer.update(answer_params)
-      render json: @answer
-    else
-      render json: @answer.errors, status: :unprocessable_entity
-    end
+    @post = Post.find(params[:post_id])
+    @answer = @post.answers.create(answer_params)
+    redirect_to post_path(@post)
   end
 
   def destroy
-     @answer.destroy
-   end
+    @post = post.find(params[:post_id])
+    @answer = @post.answers.find(params[:id])
+    @answer.destroy
+    redirect_to post_path(@post)
+  end
 
   private
-    def set_answer
-      @answer = answer.find(params[:id])
-    end
-
     def answer_params
-      params.require(:answer).permit(:topic, :body)
+      params.require(:answer).permit(:answerer, :body)
     end
 
-    def answer_owner
-      set_answer
-      redirect_to posts_path unless @answer.user == @user
-    end
+  # def create
+  #   @answer = Post.find(answer_params)
+  #   @answer.user = @user
+  #   @answer.post = @post
+  #   byebug
+  #
+  #   if @answer.save
+  #     render json: @answer, status: :created, location: @answer
+  #   else
+  #     render json: @answer.errors, status: :unprocessable_entity
+  #   end
+  # end
+  #
+  # def update
+  #   if @answer.update(answer_params)
+  #     render json: @answer
+  #   else
+  #     render json: @answer.errors, status: :unprocessable_entity
+  #   end
+  # end
+  #
+  # def destroy
+  #    @answer.destroy
+  #  end
+  #
+  # private
+  #   def set_answer
+  #     @answer = answer.find(params[:id])
+  #   end
+  #
+  #   def answer_params
+  #     params.require(:answer).permit(:topic, :body)
+  #   end
+  #
+  #   def answer_owner
+  #     set_answer
+  #     redirect_to posts_path unless @answer.user == @user
+  #   end
 end
