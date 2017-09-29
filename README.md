@@ -54,6 +54,18 @@ this will reply with a JSON object including token string like this:
   Attempts to modify someone else's information will result in a 401
   error message.
 
+#GET A QUESTION
+  Submit a GET request
+  /posts/:id
+
+  It will reply with the JSON body of the question whose id is :id.
+
+#SEE ALL QUESTIONS
+  Submit a GET request
+  /posts/
+
+  It will reply with the JSON body of all questions.
+
 #POST A QUESTION
   Submit a POST request
   /posts/
@@ -66,11 +78,35 @@ this will reply with a JSON object including token string like this:
 
   The JSON body should look like this:
     {
-      "topic" :   The topic/title/headline of the post ,
-      "body" :   A fuller explanation of the question
+      "topic" :   "The topic/title/headline of the post" ,
+      "body" :   "A fuller explanation of the question"
     }
 
   It will reply with the JSON body of the newly posted question.
+
+#POST AN ANSWER
+  Submit a POST request
+  /posts/:post_id/answers/
+  With an "Authorization" field in the header whose value is:
+
+    Token token=<token string>
+
+  It has to be a valid token. It should not have quotes around it.
+  Any user can post an answer.
+
+  The JSON body should look like this
+    {
+      "body" : "an example answer"
+    }
+
+  It will reply with the JSON body of the question with only the newly
+  posted answer.
+
+*BUGS*
+#USERS CAN FRAUDULENTLY UPDATE OTHER USERS' PROFILES
+The PUT method works properly and will only allow a user to update their
+own profile. However, if one uses the PATCH method they can change anyone's
+profiles just by being logged into the website.
 
 *NOT YET IMPLEMENTED:*
 #DELETE EXISTING USER
@@ -81,4 +117,14 @@ With an "Authorization" field in the header whose value is:
   Token token=<token string>
 
 The <token string> must be the same as the user's login token.
+It should not have quotes around it.
+
+#DELETE EXISTING ANSWER
+Submit a DELETE request
+/posts/:post_id/answers/:id
+With an "Authorization" field in the header whose value is:
+
+  Token token=<token string>
+
+The <token string> must be the same as the answer asker's login token.
 It should not have quotes around it.
