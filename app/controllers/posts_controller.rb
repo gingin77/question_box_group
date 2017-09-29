@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -29,7 +30,7 @@ class PostsController < ApplicationController
 
   def destroy
      @post.destroy
-  end
+   end
 
   private
     def set_post

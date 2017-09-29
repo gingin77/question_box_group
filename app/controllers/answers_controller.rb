@@ -4,16 +4,15 @@ class AnswersController < ApplicationController
 
   def index
     @answers = Answer.all
-    # render 'index.json'
   end
 
   def show
     @answer = Answer.find(params[:id])
-    # render 'show.json'
+    render 'show.json'
   end
 
   def new
-    @answer = Answer.new
+    @answer = Answer.new(answer_params)
   end
 
   def edit
@@ -52,13 +51,21 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:topic, :body, :user_id, :link)
   end
 
+  def logged_in?
+     !current_user.nil?
+  end
+
   def require_login
-    redirect_to   new_session_path unless logged_in
+    redirect_to new_session_path unless logged_in
   end
 
   def is_owner
     @answer = Answer.find(params[:id])
     redirect_to answers_path unless @answer.user_id == current_user
+  end
+
+  def set_answer
+    @answer = Answer.find(params[:id])
   end
 
 end
