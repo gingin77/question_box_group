@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   # before_action :set_answer, only: [:show, :update, :destroy]
   before_action :authenticate, only: [:create, :update, :destroy]
-  before_action answer_owner, only: [:update,:destroy]
+  before_action :answer_owner, only: [:update, :destroy]
 
   def index
     @answers = Answer.all
@@ -41,7 +41,7 @@ class AnswersController < ApplicationController
     # end
 
     def answer_params
-      params.require(:answer).permit(:topic, :body)
+      params.require(:answer).permit(:answerer, :body)
     end
 
     # def my_post
