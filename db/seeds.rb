@@ -9,11 +9,11 @@
 # test
 
   # user1 = User.create(username: "users", email: "user@example.com", password: "secret")
-  user2 = User.create(username: "Tracy", email: "tracy.johnson@gmail.com", password: "secret")
+  user2 = User.create(username: "Tracy", email: "tracy.johnson@example.com", password: "secret")
 
-  user3 = User.create(username: "Eli", email: "eli.lilly@gmail.com", password: "secret")
+  user3 = User.create(username: "Eli", email: "eli.lilly@example.com", password: "secret")
 
-  user4 = User.create(username: "Ted", email: "ted.leo@gmail.com", password: "secret")
+  user4 = User.create(username: "Ted", email: "ted.leo@example.com", password: "secret")
 
   # title1 = Post.create(topic: "What is the most difficult concept you've encountered in programming?", body: "ha ha ha aha ahahaha",  user_id: "1")
   # title2 = Post.create(topic: "Our second Post", body: "test 2",  user_id: "2")

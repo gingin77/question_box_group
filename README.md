@@ -11,7 +11,7 @@ with a JSON body of:
     {
        "user": {
        "username": "newguy",
-       "email": "newguy@gmail.com",
+       "email": "newguy@example.com",
        "password": "secret"
        }
     }
@@ -95,7 +95,7 @@ The JSON body should look like this:
   It will reply with the JSON body of the newly posted question.
 
 ## Post an Answer
-  Submit a POST request:
+  Submit a POST request to:
 
     /posts/:post_id/answers/
 
@@ -125,12 +125,12 @@ With an "Authorization" field in the header whose value is:
 The token string must be the same as the answer asker's login token. It should not have quotes around it.
 
 # *Bugs*
-## Users Can Fraudulently Update Other User's Profiles
+## Users Can Fraudulently Update Other Users' Profiles
 The PUT method works properly and will only allow a user to update their
 own profile. However, if one uses the PATCH method they can change anyone's
-profiles just by being logged into the website.
+profile just by being logged into the website.
 
-# *Note Yet Implemented:*
+# *Not Yet Implemented:*
 ## Delete Existing User
 Submit a DELETE request to:
 
