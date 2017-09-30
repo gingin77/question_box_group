@@ -102,10 +102,20 @@ this will reply with a JSON object including token string like this:
   It will reply with the JSON body of the question with only the newly
   posted answer.
 
+#DELETE EXISTING ANSWER
+  Submit a DELETE request
+  /posts/:post_id/answers/:id
+  With an "Authorization" field in the header whose value is:
+
+    Token token=<token string>
+
+  The <token string> must be the same as the answer asker's login token.
+  It should not have quotes around it.
+
 *BUGS*
 #USERS CAN FRAUDULENTLY UPDATE OTHER USERS' PROFILES
 The PUT method works properly and will only allow a user to update their
-own profile. However, if one uses the PATCH method they can change anyone's
+own profile. However, if you use the PATCH method you can change anyone's
 profiles just by being logged into the website.
 
 *NOT YET IMPLEMENTED:*
@@ -117,14 +127,4 @@ With an "Authorization" field in the header whose value is:
   Token token=<token string>
 
 The <token string> must be the same as the user's login token.
-It should not have quotes around it.
-
-#DELETE EXISTING ANSWER
-Submit a DELETE request
-/posts/:post_id/answers/:id
-With an "Authorization" field in the header whose value is:
-
-  Token token=<token string>
-
-The <token string> must be the same as the answer asker's login token.
 It should not have quotes around it.
