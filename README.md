@@ -44,7 +44,7 @@ this will reply with a JSON object including token string like this:
 With an "Authorization" field in the header whose value is:
 `Token token=<token string>`
 
-  The <token string> must be the same as the user's login token.
+  The token string must be the same as the user's login token.
   It should not have quotes around it.
 
   The JSON body should have any attributes that you want to modify, including:
@@ -82,7 +82,7 @@ With an "Authorization" field in the header whose value is:
 With an "Authorization" field in the header whose value is:
 `Token token=<token string>`
 
-The <token string> must be the same as the user's login token. It should not have quotes around it.
+The token string must be the same as the user's login token. It should not have quotes around it.
 
 The JSON body should look like this:
 
@@ -122,7 +122,7 @@ Submit a DELETE request to:
 With an "Authorization" field in the header whose value is:
 `Token token=<token string>`
 
-The <token string> must be the same as the answer asker's login token. It should not have quotes around it.
+The token string must be the same as the answer asker's login token. It should not have quotes around it.
 
 # *Bugs*
 ## Users Can Fraudulently Update Other User's Profiles
@@ -139,6 +139,6 @@ Submit a DELETE request to:
 With an "Authorization" field in the header whose value is:
 `Token token=<token string>`
 
-The <token string> must be the same as the user's login token.
+The token string must be the same as the user's login token.
 
 It should not have quotes around it.
