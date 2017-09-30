@@ -1,6 +1,4 @@
-json.id @answer.id
 json.body @answer.body
+json.username @answer.user.username
 json.user_id @answer.user_id
-if @answer.user
-  json.username @answer.user.username
-end
+json.answer_id @answer.id
