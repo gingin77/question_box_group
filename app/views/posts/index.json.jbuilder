@@ -11,5 +11,6 @@ json.posts @posts do |post|
       if answer.user
         json.user answer.user.username
       end
+      json.answer_id answer.id
     end
 end
