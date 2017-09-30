@@ -8,12 +8,16 @@
 
 # test
 
-  user1 = User.create(username: "users", email: "user@example.com", password: "secret")
-  user2 = User.create(username: "lyman", email: "lyman.johnson@gmail.com", password: "secret")
+  # user1 = User.create(username: "users", email: "user@example.com", password: "secret")
+  user2 = User.create(username: "Tracy", email: "tracy.johnson@gmail.com", password: "secret")
 
-  title1 = Post.create(topic: "What is the most difficult concept you've encountered in programming?", body: "ha ha ha aha ahahaha",  user_id: "1")
-  title2 = Post.create(topic: "Our second Post", body: "test 2",  user_id: "2")
+  user3 = User.create(username: "Eli", email: "eli.lilly@gmail.com", password: "secret")
 
+  user4 = User.create(username: "Ted", email: "ted.leo@gmail.com", password: "secret")
+
+  # title1 = Post.create(topic: "What is the most difficult concept you've encountered in programming?", body: "ha ha ha aha ahahaha",  user_id: "1")
+  # title2 = Post.create(topic: "Our second Post", body: "test 2",  user_id: "2")
+  #
   answer1 = Answer.create(body: "
   rake db:rollback STEP=1
 
@@ -29,7 +33,7 @@
 
   In order to rollback a specific migration use:
 
-  rake db:migrate:down VERSION=20100905201547", user: "Zachary Wright")
+  rake db:migrate:down VERSION=20100905201547", user: user3)
 
   answer2 = Answer.create(body: "
 
@@ -43,11 +47,11 @@
 
   Or, simply the prefix of the migration's file name is the version you need to rollback.
 
-  See the Ruby on Rails guide entry on migrations.", user: "John Creamer")
+  See the Ruby on Rails guide entry on migrations.", user: user4 )
 
 
   # Original post used for title3 and answers 1&2:  https://stackoverflow.com/questions/3647685/how-to-rollback-a-specific-migration
 
   title3 = Post.create(topic: "How to rollback a specific migration?", body: "I have the following migration file db> migrate > 20100905201547_create_blocks.rb
 
-  How can I specifically rollback that migration file?", answers: [answer1, answer2], user: user1)
+  How can I specifically rollback that migration file?", answers: [answer1, answer2], user: user2)

@@ -7,5 +7,5 @@ if @post.user
 end
 json.answers @post.answers do |answer|
   json.body answer.body
-  json.user answer.user
+  json.user answer.user.username
 end

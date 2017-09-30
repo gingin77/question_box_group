@@ -40,13 +40,8 @@ class AnswersController < ApplicationController
       params.require(:answer).permit(:answerer, :body)
     end
 
-    # def my_post
-    #   @post = Post.find(params[:post_id])
-    # end
-
     def answer_owner
       set_answer
       render status: :unauthorized, json: {error: "A user must be logged in to change their information."} unless @answer.user_id == @user.id
-    #   redirect_to books_path unless @answer.user_id == current_user.id
     end
 end

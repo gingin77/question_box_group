@@ -8,6 +8,9 @@ json.posts @posts do |post|
     end
     json.answers post.answers do |answer|
       json.body answer.body
-      json.user answer.user
+      if answer.user
+        json.user answer.user.username
+      end
+      json.answer_id answer.id
     end
 end
